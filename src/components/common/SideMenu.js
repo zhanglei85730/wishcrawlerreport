@@ -54,7 +54,7 @@ function SideMenu({ props, collapsed, openKeys }) {
 }
 SideMenu.propTypes = {
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { collapsed, openKeys } = state.sideMenu;
   return {
     collapsed: collapsed,

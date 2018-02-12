@@ -21,6 +21,7 @@ const app = dva({
 app.model(require('./models/table01'));
 
 app.model(require("./models/sideMenu"));
+app.model(require("./models/downloadDetail"));
 
 // 4. Router
 app.router(require('./router'));

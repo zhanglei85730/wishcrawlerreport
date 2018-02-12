@@ -9,19 +9,15 @@ class DownloadDetail extends React.Component {
   constructor(props,dispatch){
     super(props);
     //this.toggle =this.toggle.bind(this);//如果不在这里指定，在调用的时候就要指定bind(this)    
-    this.state={collapsed:false};       
+    this.state={collapsed:false}
   }  
-  toggle(){
-    const {iconCollapsed}= this.props;    
-    let collapsed=!this.state.iconCollapsed;    
+  toggle(){    
+    let collapsed=!this.state.collapsed;    
      this.setState({
-      iconCollapsed:collapsed
+      collapsed:collapsed
     })
-    
     //触发另一个组件action
-    //this.props.dispatch({type:'sideMenu/collapsed',payload:{collapsed:collapsed}})
-    this.props.dispatch({type:'downloadDetail/changeIconCollapsed',payload:{iconCollapsed:!iconCollapsed.iconCollapsed}})
-    console.log('发送的action值iconCollapsed='+!iconCollapsed.iconCollapsed)
+    this.props.dispatch({type:'sideMenu/collapsed',payload:{collapsed:collapsed}})
   }
   render() {
     return (
@@ -31,7 +27,7 @@ class DownloadDetail extends React.Component {
           <Header style={{ background: '#fff', padding: 0 }}>
             <Icon
               className="trigger"
-              type={this.props.iconCollapsed.iconCollapsed? 'menu-unfold' : 'menu-fold'}
+              type={this.state.collapsed? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle.bind(this)}
             />
           </Header>
@@ -43,12 +39,8 @@ class DownloadDetail extends React.Component {
     );
   }
 }
-function mapStateToProps(state) {
-  console.log('state.downloadDetail='+JSON.stringify(state.downloadDetail))  
-  const {iconCollapsed} = state.downloadDetail;
-    return {
-      iconCollapsed:iconCollapsed
-    };
+function mapStateToProps() {
+    return {};
 }
 // ReactDOM.render(<SiderDemo />, mountNode);
 export default connect(mapStateToProps)(DownloadDetail);
