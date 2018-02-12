@@ -12,16 +12,10 @@ class DownloadDetail extends React.Component {
     this.state={collapsed:false};       
   }  
   toggle(){
-    const {iconCollapsed}= this.props;    
-    let collapsed=!this.state.iconCollapsed;    
-     this.setState({
-      iconCollapsed:collapsed
-    })
-    
+    const {iconCollapsed}= this.props;
     //触发另一个组件action
-    //this.props.dispatch({type:'sideMenu/collapsed',payload:{collapsed:collapsed}})
+    this.props.dispatch({type:'sideMenu/collapsed',payload:{collapsed:!iconCollapsed.iconCollapsed}})
     this.props.dispatch({type:'downloadDetail/changeIconCollapsed',payload:{iconCollapsed:!iconCollapsed.iconCollapsed}})
-    console.log('发送的action值iconCollapsed='+!iconCollapsed.iconCollapsed)
   }
   render() {
     return (
