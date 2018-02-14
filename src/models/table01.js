@@ -1,6 +1,6 @@
-import * as ss from '../services/table01.js';
+import * as ss from '../services/table.js';
 export default {
-  namespace: 'table01',
+  namespace: 'table',
   state: {
     list:[]
   },

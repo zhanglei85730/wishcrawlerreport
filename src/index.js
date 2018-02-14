@@ -22,6 +22,8 @@ app.model(require('./models/table01'));
 
 app.model(require("./models/sideMenu"));
 app.model(require("./models/downloadDetail"));
+app.model(require("./models/mainLayout"));
+app.model(require("./models/common.js"));
 
 // 4. Router
 app.router(require('./router'));
