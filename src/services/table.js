@@ -4,7 +4,7 @@ export function fetchTableData() {
   console.log('fefw')
   //return request(`/api/tableData`);
   //return request(`/api/bills`);
-  return request(`http://localhost:3000/bills`);
+  return request(`/api/users`);
 }
 
 export function fetchTableDataById(values) {

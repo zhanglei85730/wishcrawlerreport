@@ -1,12 +1,13 @@
 import * as ss from '../services/table.js';
 export default {
-  namespace: 'table',
+  namespace: 'table01',
   state: {
-    list:[]
+    list:[],
+    loading:true
   },
   reducers: {
     querySuccess(state,{payload:{data:list}}){      
-      return {...state,list}
+      return {...state,list,loading:false}
     }
   },
   effects: {
@@ -15,7 +16,7 @@ export default {
       //返回的异步数据以{data:[]}这样的形式,下面将结果解构赋值
       const isLogin = yield select(state => state.table01);
       //console.log('logincheck',isLogin);
-      let {data} = yield call(ss.fetchTableData);     
+      let {data} = yield call(ss.fetchTableData);
       yield put({
         type: 'querySuccess',
         payload:{data}

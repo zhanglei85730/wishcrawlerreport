@@ -3,8 +3,8 @@
   "disableCSSModules": false,
   "publicPath": "/",
    "theme": {
-    "@primary-color": "#28bba2",
-    "@link-color": "#fff",
+    "@primary-color": "#1890ff",
+    "@link-color": "#1890ff",
     "@border-radius-base": "2px",
     "@font-size-base": "16px",
     "@line-height-base": "1.2"
@@ -16,16 +16,8 @@
         "transform-runtime",
           ["import", { "libraryName": "antd", "style": true }]
       ]
-    },
-   
-   "autoprefixer": null,
-    "proxy": {
-      "/api": {
-        "target": "http://localhost:3000/",
-        "changeOrigin": true,
-        "pathRewrite": { "^/api" : "" }
-      }
-    },
+    }, 
+   "autoprefixer": null,   
    "extraBabelPlugins": [
     "transform-runtime",
     ["import", { "libraryName": "antd", "style": true }]
@@ -34,6 +26,13 @@
       "extraBabelPlugins": [
         "transform-runtime"
       ]
+    }
+  },
+  "proxy": {
+      "/api": {
+        "target": "",
+        "changeOrigin": true,
+        "pathRewrite": { "^/api" : "" }
     }
   }
 }

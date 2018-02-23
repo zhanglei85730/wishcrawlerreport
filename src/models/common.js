@@ -3,9 +3,8 @@ export default {
   state: {
     breadcrumb: [
       {
-        name: '首页',
-        path: '/'
-      }
+        name: 'Wish财务报表',       
+      }    
     ],
     activeKey: 0,
   },
@@ -16,12 +15,15 @@ export default {
     updateActiveIndex(state, action){
       let pathname = action.payload;
       let activeKey = 0;
+      let breadcrumbItem = '';
       if (/downloadDetail/.test(pathname)) {
         activeKey = 'downloadDetail';
+        breadcrumbItem='下载详情';
       } else if (/ReportTetail/.test(pathname)) {
         activeKey = 'ReportTetail';
-      }     
-      return {...state, activeKey: activeKey};
+        breadcrumbItem='详情报表';
+      }    
+      return {...state, activeKey: activeKey,breadcrumb:[state.breadcrumb[0],{name:breadcrumbItem}]};
   }
   },
   effects: {},
