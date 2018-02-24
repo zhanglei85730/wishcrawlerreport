@@ -1,16 +1,14 @@
-
 export default {
   namespace: 'mainLayout',
   state: {
-    iconCollapsed:false,
+    iconCollapsed: false,
   },
   reducers: {
-    changeIconCollapsed(state,{payload:iconCollapsed}){     
-      //return {...state,iconCollapsed}
-      const reulst = Object.assign({iconCollapsed:iconCollapsed})
-      console.log('action-=>reulst='+JSON.stringify(reulst))
-      return reulst
-    }
+    changeIconCollapsed(state, { payload: iconCollapsed }) {
+      // return {...state,iconCollapsed}
+      const reulst = Object.assign({ iconCollapsed });     
+      return reulst;
+    },
   },
   effects: {},
   subscriptions: {},

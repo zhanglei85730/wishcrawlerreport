@@ -8,22 +8,22 @@ const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 // [key, path, text, icon]
-//主菜单节点
+// 主菜单节点
 const menus = [
   ['downloadDetail', '/downloadDetail', '下载详情', 'download'],
   ['ReportTetail', '/ReportTetail', '详情报表', 'profile'],
-  ['ReportList', '/ReportList', '报表明细', 'table'],
+  ['ReportList', '/ReportList', '报表明细', 'file-text'],
 ];
-//报表明细菜单节点
+// 报表明细菜单节点
 const ReportListChildMenus = [
-  ['customer', '/customer', '客户', ''],
-  ['product', '/product', '商品', ''],
-  ['supplier', '/supplier', '供应商', ''],
+  ['transactionMoney ', '/TransactionMoney', '交易款项', ''],
+  ['deduct', '/deduct', '扣除数额', ''],
+  ['releaseDeduct', '/releaseDeduct', '释放暂扣款', ''],
 ];
 
-function SideMenu({ collapsed, openKeys, activeKey }) {
-  //dispatch不需要传入 
-  let collapsedData = collapsed.collapsed;
+function SideMenu({ collapsed, activeKey }) {
+  // dispatch不需要传入
+  const collapsedData = collapsed.collapsed;
   return (
     <Sider trigger={null} collapsible collapsed={collapsedData} style={{ overflow: 'auto', height: '100vh' }} >
       {/* Logo */}
@@ -35,28 +35,32 @@ function SideMenu({ collapsed, openKeys, activeKey }) {
               return (
                 <SubMenu key={key} title={<span><Icon type="setting" /><span>{text}</span></span>}>
                   {
-                    ReportListChildMenus.map(([key, path, text, icon], index) => (
-                      <MenuItem key={key}>
-                        <NavLink target={path} linkText={<span><Icon
-                          type={icon} /><span>{text}</span></span>} />
+                    ReportListChildMenus.map(([key1, path1, text1, icon1], index1) => (
+                      <MenuItem key={key1}>
+                        <NavLink
+                          target={path1} linkText={<span>
+                            <Icon type={icon1} />
+                            <span>{text1}</span></span>}
+                        />
                       </MenuItem>
                     ))
                   }
                 </SubMenu>
-              )
-
+              );
             } else {
               return (
                 <MenuItem key={key}>
-                  <NavLink target={path} linkText={<span><Icon type={icon} /><span>{text}</span></span>} />
+                  <NavLink
+                    target={path} linkText={<span><Icon type={icon} /><span>{text}</span></span>}
+                  />
                 </MenuItem>
-              )
+              );
             }
           })
         }
       </Menu>
     </Sider>
-  )
+  );
 }
 SideMenu.propTypes = {
 };
@@ -64,8 +68,8 @@ const mapStateToProps = ({ sideMenu, common }) => {
   const { collapsed } = sideMenu;
   const { activeKey } = common;
   return {
-    collapsed: collapsed,
-    activeKey: activeKey
-  }
-}
+    collapsed,
+    activeKey,
+  };
+};
 export default connect(mapStateToProps)(SideMenu);

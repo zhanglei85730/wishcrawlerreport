@@ -1,15 +1,13 @@
-
 export default {
   namespace: 'sideMenu',
-  state: {collapsed: false,activeKey:'index'},
+  state: { collapsed: false, activeKey: 'index' },
   reducers: {
-    collapsed(state,{payload:collapsed}){     
-      console.log('action:'+JSON.stringify(collapsed));    
-      return {...state,collapsed:collapsed};     
-    },  
-    ChangeActiveKey(state,{payload:activeKey}){     
-      return {activeKey}
-    }
+    collapsed(state, { payload: collapsed }) {
+      return { ...state, collapsed };
+    },
+    ChangeActiveKey(state, { payload: activeKey }) {
+      return { activeKey };
+    },
   },
   effects: {},
   subscriptions: {},

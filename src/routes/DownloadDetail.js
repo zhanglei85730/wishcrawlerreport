@@ -5,17 +5,14 @@ import SearchForm from '../components/DownloadDetail/SearchForm/SearchForm.js';
 import Table01 from '../components/DownloadDetail/Table/Table01.js';
 
 
-function DownloadDetail({ children, location }){
-
+function DownloadDetail() {
   return (
-    <MainLayout>      
-       <SearchForm/>
-        <Table01/>
+    <MainLayout>
+      <SearchForm />
+      <Table01 />
     </MainLayout>
-  )
+  );
 }
 
-function mapStateToProps(state) { 
-}
 // ReactDOM.render(<SiderDemo />, mountNode);
 export default connect()(DownloadDetail);

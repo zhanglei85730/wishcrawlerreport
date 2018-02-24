@@ -1,40 +1,41 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Form, Input, Icon, Select, DatePicker } from 'antd';
+import { Button, Form, Input, Select, DatePicker } from 'antd';
+
 const FormItem = Form.Item;
 
 class SearchForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
-  //组件初始化后开始验证
+  // 组件初始化后开始验证
   /*  componentDidMount() {
      // To disabled submit button at the beginning.
      this.props.form.validateFields();
    } */
 
-  handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+  // handleChange(value) {
+  //   console.log(`selected ${value}`);
+  // }
 
-  handleBlur() {
-    console.log('blur');
-  }
+  // handleBlur() {
+  //   console.log('blur');
+  // }
 
-  handleFocus() {
-    console.log('focus');
-  }
+  // handleFocus() {
+  //   console.log('focus');
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件,
-    //['userName']参数只校验username的值    
-    this.props.form.validateFields(['age','createDate'], (err, values) => {
+    // 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件,
+    // ['userName']参数只校验username的值
+    this.props.form.validateFields(['age', 'createDate'], (err, values) => {
       if (!err) {
-        const createDateFormat=values.createDate.format('YYYY-MM-DD')
-        console.log('Received values of form: ',{...values,createDate:createDateFormat});
-        //table01为model的namespace,tableData为effects下方法，相当与异步的action       
-        this.props.dispatch({ type: 'table01/tableDataById', payload: { values } })
+        const createDateFormat = values.createDate.format('YYYY-MM-DD')
+        console.log('Received values of form: ', { ...values, createDate: createDateFormat });
+        // table01为model的namespace,tableData为effects下方法，相当与异步的action
+        this.props.dispatch({ type: 'table01/tableDataById', payload: { values } });
       }
     });
   }
@@ -43,14 +44,15 @@ class SearchForm extends React.Component {
     const config = {
       rules: [{ type: 'object', required: true, message: 'Please select time!' }],
     };
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    // const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form layout="inline" onSubmit={this.handleSubmit.bind(this)} >
         <FormItem label="账单时间">
           {getFieldDecorator('createDate', config)(
-            <DatePicker />
+            <DatePicker />,
           )}
-        </FormItem>       
+        </FormItem>
         <FormItem>
           {getFieldDecorator('age', {
             rules: [{ required: true, message: 'Please input your age' }],
@@ -65,7 +67,9 @@ class SearchForm extends React.Component {
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            filterOption={(input, option) => {
+              return (option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+            }}
           >
             <Option value="jack">Jack</Option>
             <Option value="lucy">Lucy</Option>
@@ -82,24 +86,25 @@ class SearchForm extends React.Component {
   }
 }
 
-const saveFormData = {
-  onFieldsChange(props, changedFields) {
-    props.onChange(changedFields);
-  },
-  mapPropsToFields(props) {
-    return {
-      userName: Form.createFormField({
-        ...props.userName,
-        value: props.userName.value,
-      }),
-    };
-  },
-  onValuesChange(_, values) {
-    console.log(values);
-  },
-}
+// const saveFormData = {
+//   onFieldsChange(props, changedFields) {
+//     props.onChange(changedFields);
+//   },
+//   mapPropsToFields(props) {
+//     return {
+//       userName: Form.createFormField({
+//         ...props.userName,
+//         value: props.userName.value,
+//       }),
+//     };
+//   },
+//   onValuesChange(_, values) {
+//     console.log(values);
+//   },
+// }
 
 const SearchFormWarp = Form.create()(SearchForm);
-//export default WrappedDownloadDetailForm;
-//必须要用connent方法才能与redux结合，才能用redux的dispatch
-export default connect()(SearchFormWarp)
+// export default WrappedDownloadDetailForm;
+// 必须要用connent方法才能与redux结合，才能用redux的dispatch
+export default connect()(SearchFormWarp);
+

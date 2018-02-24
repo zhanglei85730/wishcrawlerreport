@@ -5,11 +5,11 @@ import './index.css';
 // 1. Initialize
 // const app = dva();
 const app = dva({
-    history: browserHistory,
-    onError(e) {
-      message.error(e.message, ERROR_MSG_DURATION);
-    },
-  });
+  history: browserHistory,
+  onError(e) {
+    message.error(e.message, ERROR_MSG_DURATION);
+  },
+});
 
 // 2. Plugins
 // app.use({});
