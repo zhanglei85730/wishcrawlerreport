@@ -4,13 +4,13 @@ import { Layout, Menu, Icon, Divider, Avatar } from 'antd';
 import SideMenu from './SideMenu.js';
 import BreadcrumbAgent from './Breadcrumb.js';
 import { Row, Col } from 'antd/lib/grid';
+import styles from './MainLayout.css';
 
 
 const { Header, Content } = Layout;
 
 function MainLayout({ children, location, iconCollapsed, dispatch, BreadcrumbData }) {
-    // 会传入props
-    console.log('执行')
+    // 会传入props    
     const iconCollapsedValue = iconCollapsed.iconCollapsed;
     function toggle() {
         //const { iconCollapsed } = props;
@@ -28,15 +28,20 @@ function MainLayout({ children, location, iconCollapsed, dispatch, BreadcrumbDat
                             <Icon
                                 className="trigger"
                                 type={iconCollapsedValue ? 'menu-unfold' : 'menu-fold'}
-                                onClick={toggle}/>
+                                onClick={toggle} style={{marginLeft:'20px',fontSize:'20px'}}/>
                         </Col>
-                        <Col span={6}>
-                            <Icon type='user' style={{fontSize:'20px'}}/> 
-                            <Icon type='search' style={{fontSize:'20px'}}/>                           
+                        <Col span={4}>
+                            <div style={{ float: 'right',paddingRight:'10px'}}>
+                                <Icon type='search' className={styles.rigitIcon} />
+                                <Icon type='bell' className={styles.rigitIcon} />
+                                <Icon type='user' className={styles.rigitIcon}/>
+                                
+                                
+                            </div>
                         </Col>
                     </Row>
 
-                    
+
                 </Header>
                 <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
                     <BreadcrumbAgent data={BreadcrumbData} />

@@ -59,7 +59,8 @@ function Table01({ dispatch,list:dataSource,loading}) {
       //table必须有key属性，可以将设置id为key
       rowKey="id"
       rowSelection={{}}
-      loading={loading}     
+      loading={loading}
+      style={{marginTop:'20px'}}   
     />
   )
 }

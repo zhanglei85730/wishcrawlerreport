@@ -3,7 +3,7 @@ import { Link } from 'dva/router';
 
 const BreadcrumbAgent = (props) => {
     return (
-        <Breadcrumb>
+        <Breadcrumb style={{fontSize:'14px'}}>
             {
                 props.data.map((v, i) => (
                     <Breadcrumb.Item key={i}>
