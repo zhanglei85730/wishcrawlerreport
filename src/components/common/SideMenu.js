@@ -28,7 +28,12 @@ function SideMenu({ collapsed, activeKey }) {
     <Sider trigger={null} collapsible collapsed={collapsedData} style={{ overflow: 'auto', height: '100vh' }} >
       {/* Logo */}
       <div className={styles.logo} />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeKey]} style={{ marginTop: '30px' }}>
+      <Menu
+        theme="dark" mode="inline"
+        defaultSelectedKeys={[activeKey]}
+        style={{ marginTop: '30px' }}
+        openKeys={['ReportList']}
+      >
         {
           menus.map(([key, path, text, icon], index) => {
             if (key === 'ReportList') {

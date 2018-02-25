@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Layout, Icon, Divider } from 'antd';
+import { Route } from 'dva/router';
 import { Row, Col } from 'antd/lib/grid';
 import SideMenu from './SideMenu.js';
 import BreadcrumbAgent from './Breadcrumb.js';
 import styles from './MainLayout.css';
+import menuNodes from '../../config/router.js';
+// import PageTitle from './PageTitle.js';
 
 const { Header, Content } = Layout;
 
@@ -21,7 +24,7 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
     <Layout>
       <SideMenu />
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}>
+        <Header style={{ background: '#fff', padding: 0, height: 'auto' }}>
           <Row type="flex" justify="space-between">
             <Col span={6}>
               <Icon
@@ -38,10 +41,21 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
               </div>
             </Col>
           </Row>
+          <Divider type="horizontal" style={{margin:'0 0 20px 0'}}/>
+          <div style={{ padding: '0 20px' }}>
+            <BreadcrumbAgent data={BreadcrumbData} />
+            {menuNodes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.sidebar}
+              />
+            ))}
+          </div>         
+          {/* <PageTitle /> */}
         </Header>
         <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-          <BreadcrumbAgent data={BreadcrumbData} />
-          <Divider type="horizontal" />
           {children}
         </Content>
       </Layout>

@@ -5,8 +5,8 @@
    "theme": {
     "@primary-color": "#1890ff",
     "@link-color": "#1890ff",
-    "@border-radius-base": "2px",
-    "@font-size-base": "16px",
+    "@border-radius-base": "4px",
+    "@font-size-base": "15px",
     "@line-height-base": "1.2"
   },
   "env": {
