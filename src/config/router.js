@@ -2,6 +2,7 @@ import DownloadDetail from '../routes/DownloadDetail';
 import ReportTetail from '../routes/ReportTetail.js';
 import Deduct from '../routes/Deduct.js';
 import TransactionMoney from '../routes/TransactionMoney.js';
+import ReleaseDeduct from '../routes/ReleaseDeduct.js';
 
 const pageStyle = {
   fontColor: { color: '#333' },
@@ -18,7 +19,7 @@ const routes = [
   },
   {
     path: '/ReportTetail',
-    sidebar: () => <div style={titleCss}>详情报告</div>,
+    sidebar: () => <div style={titleCss}>报表详情</div>,
     main: ReportTetail,
   },
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/transactionMoney',
     sidebar: () => <div style={titleCss}>交易款项</div>,
     main: TransactionMoney,
+  },
+  {
+    path: '/releaseDeduct',
+    sidebar: () => <div style={titleCss}>释放扣款数</div>,
+    main: ReleaseDeduct,
   },
 ];
 

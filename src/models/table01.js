@@ -5,10 +5,14 @@ export default {
   state: {
     list: [],
     loading: true,
+    selectedRowKeysArr: [],
   },
   reducers: {
     querySuccess(state, { payload: { data: list } }) {
       return { ...state, list, loading: false };
+    },
+    selectedRowKeysReducer(state, { payload }) {
+      return { ...state, selectedRowKeysArr: payload };
     },
   },
   effects: {

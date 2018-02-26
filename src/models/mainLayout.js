@@ -6,7 +6,7 @@ export default {
   reducers: {
     changeIconCollapsed(state, { payload: iconCollapsed }) {
       // return {...state,iconCollapsed}
-      const reulst = Object.assign({ iconCollapsed });     
+      const reulst = Object.assign({ iconCollapsed });
       return reulst;
     },
   },

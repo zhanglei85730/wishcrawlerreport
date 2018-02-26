@@ -41,7 +41,7 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
               </div>
             </Col>
           </Row>
-          <Divider type="horizontal" style={{margin:'0 0 20px 0'}}/>
+          <Divider type="horizontal" style={{ margin: '0 0 20px 0' }} />
           <div style={{ padding: '0 20px' }}>
             <BreadcrumbAgent data={BreadcrumbData} />
             {menuNodes.map((route, index) => (
@@ -52,7 +52,7 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
                 component={route.sidebar}
               />
             ))}
-          </div>         
+          </div>
           {/* <PageTitle /> */}
         </Header>
         <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>

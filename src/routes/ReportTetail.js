@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'dva';
-function RreportDetail() {
+import SearchForm from '../components/ReportTetil/SearchForm/SearchForm.js';
+import Table01 from '../components/DownloadDetail/Table/Table01.js';
+
+function DownloadDetail() {
   return (
-    <div>2222222222222</div>
+    <div>
+      <SearchForm />
+      <Table01 />
+    </div>
   );
 }
 
 // ReactDOM.render(<SiderDemo />, mountNode);
-export default connect()(RreportDetail);
+export default connect()(DownloadDetail);

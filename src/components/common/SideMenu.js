@@ -32,7 +32,7 @@ function SideMenu({ collapsed, activeKey }) {
         theme="dark" mode="inline"
         defaultSelectedKeys={[activeKey]}
         style={{ marginTop: '30px' }}
-        openKeys={['ReportList']}
+      // openKeys={['ReportList']}
       >
         {
           menus.map(([key, path, text, icon], index) => {

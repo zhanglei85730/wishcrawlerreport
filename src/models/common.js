@@ -22,6 +22,9 @@ export default {
       } else if (/ReportTetail/.test(pathname)) {
         activeKeyValue = 'ReportTetail';
         breadcrumbItem = '详情报表';
+      } else if (/TransactionMoney/.test(pathname)) {
+        activeKeyValue = 'TransactionMoney';
+        breadcrumbItem = '交易款项';
       }
       return {
         ...state,
@@ -42,5 +45,4 @@ export default {
       });
     },
   },
-};
-
+}

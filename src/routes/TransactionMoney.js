@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'dva';
-import styles from './TransactionMoney.css';
+import SearchForm from '../components/TransactionMoney/SearchForm/SearchForm.js';
+import Table01 from '../components/DownloadDetail/Table/Table01.js';
 
-function TransactionMoney() {
+function DownloadDetail() {
   return (
-    <div className={styles.normal}>
-      <div>ssss</div>
+    <div>
+      <SearchForm />
+      <Table01 />
     </div>
   );
 }
 
-function mapStateToProps() {
-  return {};
-}
-
-export default connect(mapStateToProps)(TransactionMoney);
+// ReactDOM.render(<SiderDemo />, mountNode);
+export default connect()(DownloadDetail);

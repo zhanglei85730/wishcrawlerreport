@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Form, Input, Select, DatePicker, Icon } from 'antd';
+import { Button, Form, Input, Select, DatePicker, Icon, Row, Col } from 'antd';
 import moment from 'moment';
+import style from '../../../config/global.less';
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
@@ -10,6 +11,14 @@ const Option = Select.Option;
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchMore: 'none',
+    };
+  }
+  // 展开更多收缩条件
+  toggleSearchMoreInfo = () => {
+    const searchMoreValue = this.state.searchMore === 'none' ? 'block' : 'none';
+    this.setState({ searchMore: searchMoreValue });
   }
   // 组件初始化后开始验证
   /*  componentDidMount() {
@@ -50,65 +59,62 @@ class SearchForm extends React.Component {
     const monthFormat = 'YYYY/MM';
 
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit.bind(this)} >
+      <Form layout="inline" onSubmit={this.handleSubmit.bind(this)} className={style.coustomFormLyout}>
+
         {/* <FormItem label="选择日期">
           {getFieldDecorator('createDate', config)(
             <DatePicker />,
           )}
         </FormItem> */}
-        <FormItem label="选择日期">
-          <RangePicker
-            defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
-            format={dateFormat}
-          />
-        </FormItem>
-        {/* 账号选择 */}
-        <FormItem label="账号">
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="请选择"
-            optionFilterProp="children"
-            mode="multiple"
-            filterOption={(input, option) => {
-              return (option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0);
-            }}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
-          </Select>
-        </FormItem>
-        {/*  */}
-        <FormItem label="部门">
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a person"
-            optionFilterProp="children"
-            mode="multiple"
-            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
-          </Select>
-        </FormItem>
-        <FormItem>
-          <Button type="primary">查询</Button>
-        </FormItem>
-        <FormItem>
-          <Button>审核通过</Button>
-        </FormItem>
-        <FormItem>
-          <Button>审核驳回</Button>
-        </FormItem>
-        <FormItem>
-          <Button>批量下载</Button>
-        </FormItem>
-        <FormItem>
-          <Button>重置</Button>
-        </FormItem>
+        <Row>
+          <Col md={5} sm={24}>
+            <FormItem label="选择日期">
+              <RangePicker
+                defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
+                format={dateFormat}
+              />
+            </FormItem>
+          </Col>
+          <Col md={5} sm={24}>
+            {/* 账号选择 */}
+            <FormItem label="选择账号">
+              <Select
+                placeholder="请选择"
+                optionFilterProp="children"
+                mode="multiple"
+              >
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="tom">Tom</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col md={5} sm={24}>
+            {/* 账号选择 */}
+            <FormItem label="所在部门">
+              <Select
+                placeholder="选择部门"
+                optionFilterProp="children"
+                mode="multiple"
+                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              >
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="tom">Tom</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col md={9} sm={24}>
+            {/* 账号选择 */}
+            <Button type="primary">查询</Button>
+            <Button type="primary" style={{ marginLeft: '10px' }}>审核通过</Button>
+            <Button style={{ marginLeft: '10px' }}>审核驳回</Button>
+            <Button style={{ marginLeft: '10px' }}>批量下载</Button>
+            <Button style={{ marginLeft: '10px' }}>重置</Button>
+            <a className={style.cursor} onClick={this.toggleSearchMoreInfo.bind(this)} style={{ marginLeft: '10px' }}>展开<Icon type={this.state.searchMore === 'none' ? 'up' : 'down'} /></a>
+          </Col>
+        </Row>
+
 
         {/* <FormItem>
           {getFieldDecorator('age', {
@@ -138,10 +144,55 @@ class SearchForm extends React.Component {
             搜索
             </Button>
         </FormItem> */}
-        <FormItem>
-          展开<Icon type="eye-o" />
-        </FormItem>
+        <div style={{ display: this.state.searchMore }}>
+          <Row>
+            <Col md={5} sm={24}>
+              <FormItem label="下载状态">
+                <Select
+                  placeholder="请选择"
+                  optionFilterProp="children"
+                  mode="multiple"
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col md={5} sm={24}>
+              <FormItem label="审批状态">
+                <Select
+                  placeholder="请选择"
+                  optionFilterProp="children"
+                  mode="multiple"
+                >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+              </FormItem>
+            </Col>
+            <Col md={5} sm={24}>
+              <FormItem label="失败原因">
+                <Select
+                  placeholder="请选择"
+                  optionFilterProp="children"
+                  mode="multiple"
+                  filterOption={(input, option) => (
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  )}
+                >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+              </FormItem>
+            </Col>
+          </Row>
+        </div>
       </Form>
+
     );
   }
 }
