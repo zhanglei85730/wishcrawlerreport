@@ -11,12 +11,12 @@ const MenuItem = Menu.Item;
 // 主菜单节点
 const menus = [
   ['downloadDetail', '/downloadDetail', '下载详情', 'download'],
-  ['ReportTetail', '/ReportTetail', '详情报表', 'profile'],
-  ['ReportList', '/ReportList', '报表明细', 'file-text'],
+  ['reportTetail', '/reportTetail', '详情报表', 'profile'],
+  ['reportList', '/reportList', '报表明细', 'file-text'],
 ];
 // 报表明细菜单节点
 const ReportListChildMenus = [
-  ['transactionMoney ', '/TransactionMoney', '交易款项', ''],
+  ['transactionMoney ', '/transactionMoney', '交易款项', ''],
   ['deduct', '/deduct', '扣除数额', ''],
   ['releaseDeduct', '/releaseDeduct', '释放暂扣款', ''],
 ];
@@ -36,7 +36,7 @@ function SideMenu({ collapsed, activeKey }) {
       >
         {
           menus.map(([key, path, text, icon], index) => {
-            if (key === 'ReportList') {
+            if (key === 'reportList') {
               return (
                 <SubMenu key={key} title={<span><Icon type="setting" /><span>{text}</span></span>}>
                   {

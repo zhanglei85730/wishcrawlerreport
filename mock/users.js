@@ -20,9 +20,16 @@ let db = Mock.mock({
 module.exports = {
   ['GET /api/users'](req, res) {
     res.status(200).json(db);
-    // setTimeout((function(res,db){
-    //     res.status(200).json(db);
-    // })(res,db),1000)
+  },
+  //get方式根据查询条件返回数据
+  ['GET /api/downloadDetail/search'](req, res) {
+    const accounts = req.query.accounts;
+    const responseData = db.data.filter((item) => {
+      if (item.accountCode === accounts) {
+        return item;
+      }
+    });
+    res.status(200).json({ data: responseData });
   },
   ['POST /api/users'](req, res) {
     let user = req.body;

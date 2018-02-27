@@ -35,17 +35,33 @@ class SearchForm extends React.Component {
   //   console.log('focus');
   // }
 
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件,
+  //   // ['userName']参数只校验username的值
+  //   this.props.form.validateFields(['createDate'], (err, values) => {
+  //     if (!err) {
+  //       const createDateFormat = values.createDate.format('YYYY-MM-DD')
+  //       console.log('Received values of form: ', { ...values, createDate: createDateFormat });
+  //       // table01为model的namespace,tableData为effects下方法，相当与异步的action
+  //       this.props.dispatch({ type: 'table01/tableDataById', payload: { values } });
+  //     }
+  //   });
+  // }
   handleSubmit = (e) => {
+    const dateFormat = 'YYYY-MM-DD';
     e.preventDefault();
     // 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件,
     // ['userName']参数只校验username的值
-    this.props.form.validateFields(['age', 'createDate'], (err, values) => {
-      if (!err) {
-        const createDateFormat = values.createDate.format('YYYY-MM-DD')
-        console.log('Received values of form: ', { ...values, createDate: createDateFormat });
-        // table01为model的namespace,tableData为effects下方法，相当与异步的action
-        this.props.dispatch({ type: 'table01/tableDataById', payload: { values } });
-      }
+    this.props.form.validateFields((err, fieldsValue) => {
+      const values = {
+        ...fieldsValue,
+        createDate: fieldsValue.createDate ? ([fieldsValue.createDate[0].format(dateFormat), fieldsValue.createDate[1].format(dateFormat)]) : [],
+        departs: fieldsValue.departs ? fieldsValue.departs.join(',') : '',
+        accounts: fieldsValue.accounts ? fieldsValue.accounts.join(',') : '',
+      };     
+      // 提交
+      this.props.dispatch({ type: 'table01/search', payload: values });
     });
   }
 
@@ -56,57 +72,57 @@ class SearchForm extends React.Component {
     // const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
     const { getFieldDecorator } = this.props.form;
     const dateFormat = 'YYYY/MM/DD';
-    const monthFormat = 'YYYY/MM';
-
     return (
       <Form layout="inline" onSubmit={this.handleSubmit.bind(this)} className={style.coustomFormLyout}>
-
-        {/* <FormItem label="选择日期">
-          {getFieldDecorator('createDate', config)(
-            <DatePicker />,
-          )}
-        </FormItem> */}
         <Row>
           <Col md={5} sm={24}>
             <FormItem label="选择日期">
-              <RangePicker
-                defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
-                format={dateFormat}
-              />
+              {getFieldDecorator('createDate', [{ required: false }])(
+                <RangePicker
+                  format={dateFormat}
+                />,
+              )}
+
             </FormItem>
           </Col>
           <Col md={5} sm={24}>
             {/* 账号选择 */}
             <FormItem label="选择账号">
-              <Select
-                placeholder="请选择"
-                optionFilterProp="children"
-                mode="multiple"
-              >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
-              </Select>
+              {getFieldDecorator('accounts', [{ required: false }])(
+                <Select
+                  placeholder="请选择"
+                  optionFilterProp="children"
+                  mode="multiple"
+                >
+                  <Option value="onemoregood">onemoregood</Option>
+                  <Option value="Shuibaobao">Shuibaobao</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+              )}
+
             </FormItem>
           </Col>
           <Col md={5} sm={24}>
             {/* 账号选择 */}
             <FormItem label="所在部门">
-              <Select
-                placeholder="选择部门"
-                optionFilterProp="children"
-                mode="multiple"
-                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-              >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
-              </Select>
+              {getFieldDecorator('departs', [{ required: false }])(
+                <Select
+                  placeholder="选择部门"
+                  optionFilterProp="children"
+                  mode="multiple"
+                  filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="tom">Tom</Option>
+                </Select>
+              )}
+
             </FormItem>
           </Col>
           <Col md={9} sm={24}>
             {/* 账号选择 */}
-            <Button type="primary">查询</Button>
+            <Button type="primary" htmlType="submit">查询</Button>
             <Button type="primary" style={{ marginLeft: '10px' }}>审核通过</Button>
             <Button style={{ marginLeft: '10px' }}>审核驳回</Button>
             <Button style={{ marginLeft: '10px' }}>批量下载</Button>

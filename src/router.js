@@ -7,6 +7,7 @@ import { Router, Route, Switch, Redirect, IndexRoute } from 'dva/router';
 // import TransactionMoney from './routes/TransactionMoney.js';
 import MainLayout from './components/common/MainLayout.js';
 import menuNodes from './config/router.js';
+import Login from './routes/Login.js';
 
 // const routes = [
 //   {
@@ -46,6 +47,8 @@ import menuNodes from './config/router.js';
 //   );
 // }
 function RouterConfig({ history }) {
+  const isLogined = false;
+  const logindPath = '/login';
   return (
     <Router history={history}>
       <MainLayout>
@@ -54,7 +57,9 @@ function RouterConfig({ history }) {
             key={index}
             path={route.path}
             exact={route.exact}
-            component={route.main}
+            render={(props) => (
+              isLogined ? <route.main /> : <Redirect to="/login" />)}
+          // render={() => (isLogined ? <route.main /> : <Login />)}
           />
         ))}
       </MainLayout>

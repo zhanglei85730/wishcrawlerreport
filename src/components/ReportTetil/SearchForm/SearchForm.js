@@ -24,7 +24,7 @@ class SearchForm extends React.Component {
         const createDateFormat = values.createDate.format('YYYY-MM-DD')
         console.log('Received values of form: ', { ...values, createDate: createDateFormat });
         // table01为model的namespace,tableData为effects下方法，相当与异步的action
-        this.props.dispatch({ type: 'table01/tableDataById', payload: { values } });
+        this.props.dispatch({ type: 'table01/search', payload: { values } });
       }
     });
   }

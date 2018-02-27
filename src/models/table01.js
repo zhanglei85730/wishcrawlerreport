@@ -35,6 +35,14 @@ export default {
         payload: { data },
       });
     },
+    *search({ payload }, { call, put }) {
+      // 返回的异步数据以{data:[]}这样的形式,下面将结果解构赋值
+      const { data } = yield call(ss.search, payload);
+      yield put({
+        type: 'querySuccess',
+        payload: { data },
+      });
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
