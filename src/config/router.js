@@ -13,6 +13,12 @@ const { fontColor, fontSize } = pageStyle;
 const titleCss = Object.assign(fontColor, fontSize);
 const routes = [
   {
+    path: '/',
+    exact: true,
+    sidebar: () => <div style={titleCss} > 下载详情</div >,
+    main: DownloadDetail,
+  },
+  {
     path: '/downloadDetail',
     exact: true,
     sidebar: () => <div style={titleCss} > 下载详情</div >,

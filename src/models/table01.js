@@ -48,7 +48,7 @@ export default {
     setup({ dispatch, history }) {
       // query必须传入
       return history.listen(({ pathname, query }) => {
-        if (pathname === '/downloadDetail') {
+        if (pathname === '/downloadDetail' || pathname === '/') {
           // type:'tableData' 指异步的action
           dispatch({ type: 'tableData', payload: query });
         }
