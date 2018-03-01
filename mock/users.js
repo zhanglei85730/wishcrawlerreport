@@ -38,4 +38,10 @@ module.exports = {
     db.data.push(user);
     res.status(200).json(user);
   },
+  // 登录模拟
+  ['get /api/login'](req, res) {
+    const { userName, password } = req.query;
+    const isAuthorized = (userName === 'zl' && password === '30') ? true : false;
+    res.status(200).json({ logined: isAuthorized });
+  },
 };

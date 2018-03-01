@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Route } from 'dva/router';
+import { connect } from 'dva';
+import { Router, Route, Redirect, Switch } from 'dva/router';
 // import IndexPage from './routes/IndexPage';
 // import DownloadDetail from './routes/DownloadDetail';
 // import ReportTetail from './routes/ReportTetail.js';
@@ -24,6 +25,14 @@ const RouterProtect = ({ history }) => (
   </Router>
 );
 
+const LoginRoute = ({ history }) => (
+  <Router history={history}>
+    <Switch>
+      <Route path="/" exact render={() => (<Redirect to="/login" />)} />
+      <Route path="/login" exact component={Login} />
+    </Switch >
+  </Router>
+);
 // function RouterConfig({ history }) {
 //   const isLogined = false;
 //   const logindPath = '/login';
@@ -48,12 +57,18 @@ const RouterProtect = ({ history }) => (
 //   );
 // }
 
-const Authorized = (props) => {
-  const isAuthorized = true;
+const Authorized = ({ app, history }) => {
+  // app是一个隐含属性
+  const { login } = app._store.getState();
+  const { isAuthorized } = login;
+  debugger
   return (
-    isAuthorized ? <RouterProtect {...props} /> : <Login />
+    isAuthorized ? <RouterProtect history={history} /> : <LoginRoute history={history} />
   );
 };
-export default Authorized;
+// const mapStateToProps = ({ login }) => {
+//   return login;
+// };
+// export default connect(mapStateToProps)(Authorized);
 
-// export default RouterConfig;
+export default Authorized;
