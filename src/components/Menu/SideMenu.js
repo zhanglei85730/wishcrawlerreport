@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Layout, Menu, Icon } from 'antd';
-import styles from './common.less';
+import styles from './index.less';
 import NavLink from '../NavLink/NavLink.js';
 
 const { Sider } = Layout;
@@ -27,7 +27,7 @@ function SideMenu({ collapsed, activeKey }) {
   return (
     <Sider trigger={null} collapsible collapsed={collapsedData} style={{ overflow: 'auto', height: '100vh' }} >
       {/* Logo */}
-      <div className={styles.logo} />
+      <div className={styles.logo}></div>
       <Menu
         theme="dark" mode="inline"
         defaultSelectedKeys={[activeKey]}

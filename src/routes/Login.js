@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import Login from '../components/Login/Login.js';
+import Login from '../components/Login';
 
 function WrappedLogin() {
   return (

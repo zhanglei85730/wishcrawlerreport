@@ -3,15 +3,14 @@ import { connect } from 'dva';
 import { Layout, Icon, Divider } from 'antd';
 import { Route } from 'dva/router';
 import { Row, Col } from 'antd/lib/grid';
-import SideMenu from './SideMenu.js';
-import BreadcrumbAgent from './Breadcrumb.js';
-import styles from './MainLayout.css';
+import SideMenu from '../Menu/SideMenu.js';
+import BreadcrumbAgent from '../Breadcrumb';
 import menuNodes from '../../config/router.js';
-// import PageTitle from './PageTitle.js';
+import GlobalHeader from '../GlobalHeader';
 
 const { Header, Content } = Layout;
 
-function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
+function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData, isAuthorized }) {
   // 会传入props
   const iconCollapsedValue = iconCollapsed.iconCollapsed;
   function toggle() {
@@ -20,27 +19,22 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
     dispatch({ type: 'sideMenu/collapsed', payload: { collapsed: !iconCollapsedValue } });
     dispatch({ type: 'mainLayout/changeIconCollapsed', payload: { iconCollapsed: !iconCollapsedValue } });
   }
+  const handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      dispatch({ type: 'login/logout', payload: !isAuthorized });
+    }
+  };
   return (
     <Layout>
       <SideMenu />
       <Layout>
         <Header style={{ background: '#fff', padding: 0, height: 'auto' }}>
-          <Row type="flex" justify="space-between">
-            <Col span={6}>
-              <Icon
-                className="trigger"
-                type={iconCollapsedValue ? 'menu-unfold' : 'menu-fold'}
-                onClick={toggle} style={{ marginLeft: '20px', fontSize: '20px' }}
-              />
-            </Col>
-            <Col span={4}>
-              <div style={{ float: 'right', paddingRight: '10px' }}>
-                <Icon type="search" className={styles.rigitIcon} />
-                <Icon type="bell" className={styles.rigitIcon} />
-                <Icon type="user" className={styles.rigitIcon} />
-              </div>
-            </Col>
-          </Row>
+          <Icon
+            className="trigger"
+            type={iconCollapsedValue ? 'menu-unfold' : 'menu-fold'}
+            onClick={toggle} style={{ marginLeft: '20px', fontSize: '20px' }}
+          />
+          <GlobalHeader onMenuClick={handleMenuClick} />
           <Divider type="horizontal" style={{ margin: '0 0 20px 0' }} />
           <div style={{ padding: '0 20px' }}>
             <BreadcrumbAgent data={BreadcrumbData} />
@@ -63,11 +57,12 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData }) {
   );
 }
 
-function mapStateToProps({ mainLayout, common }) {
+function mapStateToProps({ mainLayout, common, login }) {
   // console.log('mapStateToProps:'+JSON.stringify(mainLayout))
   const BreadcrumbValue = common.breadcrumb;
   // 返回在键值就是组件接受的属性值
-  return { ...mainLayout, BreadcrumbData: BreadcrumbValue };
+  return { ...mainLayout, BreadcrumbData: BreadcrumbValue, ...login };
 }
 
 export default connect(mapStateToProps)(MainLayout);
+// export default wrappedMainLayout;

@@ -6,10 +6,11 @@ export default {
   reducers: {
     //  { payload }接受的参数为 yield put({})中的对象action
     Authorized(state, { payload }) {
-      sessionStorage.setItem('authorized', JSON.stringify(payload.isAuthorized));
-      const re = { ...state, ...payload };
-      console.log('re:' + JSON.stringify(re));
+      // sessionStorage.setItem('authorized', JSON.stringify(payload.isAuthorized));      
       return { ...state, ...payload };
+    },
+    logout(state, { payload }) {
+      return { ...state, isAuthorized: payload };
     },
   },
   effects: {

@@ -5,13 +5,12 @@ import style from './index.css';
 
 const FormItem = Form.Item;
 
-function Login({ dispatch, form, isAuthorized }) {
+function Login({ dispatch, form }) {
   const { getFieldDecorator } = form;
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         dispatch({ type: 'login/loginRequest', payload: values });
       }
     });
@@ -19,20 +18,20 @@ function Login({ dispatch, form, isAuthorized }) {
 
   return (
     <Row type="flex" justify="center" align="middle" style={{ marginTop: '20px' }}>
-      <Col lg={6} md={10} sm={24}>
+      <Col lg={7} md={10} sm={24}>
         <Form onSubmit={handleSubmit} className={style.loginForm}>
           <FormItem>
             {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+              rules: [{ required: true, message: '请输入用户名' }],
             })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
               )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+              rules: [{ required: true, message: '请输入密码' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
               )}
           </FormItem>
           <FormItem>
@@ -40,13 +39,13 @@ function Login({ dispatch, form, isAuthorized }) {
               valuePropName: 'checked',
               initialValue: true,
             })(
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>记住密码</Checkbox>
               )}
-            <a className={style.loginFormForgot} href="">Forgot password</a>
+            <a className={style.loginFormForgot} href="">忘记密码</a>
             <Button type="primary" htmlType="submit" className={style.loginFormButton}>
-              Log in
+              登 录
           </Button>
-            Or <a href="">register now!</a>
+            无账号？ <a href="">马上注册!</a>
           </FormItem>
         </Form>
       </Col>
