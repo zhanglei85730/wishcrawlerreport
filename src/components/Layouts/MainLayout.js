@@ -21,9 +21,10 @@ function MainLayout({ children, iconCollapsed, dispatch, BreadcrumbData, isAutho
   }
   const handleMenuClick = ({ key }) => {
     if (key === 'logout') {
-      dispatch({ type: 'login/logout', payload: !isAuthorized });
+      dispatch({ type: 'login/logout', payload: false });
     }
   };
+
   return (
     <Layout>
       <SideMenu />

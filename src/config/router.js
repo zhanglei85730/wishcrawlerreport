@@ -3,21 +3,16 @@ import ReportTetail from '../routes/ReportTetail.js';
 import Deduct from '../routes/Deduct.js';
 import TransactionMoney from '../routes/TransactionMoney.js';
 import ReleaseDeduct from '../routes/ReleaseDeduct.js';
-import Login from '../routes/Login.js';
+import Login from '../routes/Login/Login.js';
+import Summary from '../routes/Summary/Summary.js';
 
 const pageStyle = {
   fontColor: { color: '#333' },
-  fontSize: { fontSize: '20px' }
+  fontSize: { fontSize: '20px' },
 };
 const { fontColor, fontSize } = pageStyle;
 const titleCss = Object.assign(fontColor, fontSize);
 const routes = [
-  // {
-  //   path: '/',
-  //   exact: true,
-  //   sidebar: () => <div style={titleCss} > 下载详情</div >,
-  //   main: DownloadDetail,
-  // },
   {
     path: '/downloadDetail',
     exact: true,
@@ -44,6 +39,11 @@ const routes = [
     path: '/releaseDeduct',
     sidebar: () => <div style={titleCss}>释放扣款数</div>,
     main: ReleaseDeduct,
+  },
+  {
+    path: '/summary',
+    sidebar: () => <div style={titleCss}>财务EAS凭证</div>,
+    main: Summary,
   },
   {
     path: '/login',

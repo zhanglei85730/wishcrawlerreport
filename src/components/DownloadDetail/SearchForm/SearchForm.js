@@ -21,33 +21,6 @@ class SearchForm extends React.Component {
     this.setState({ searchMore: searchMoreValue });
   }
   // 组件初始化后开始验证
-  /*  componentDidMount() {
-     // To disabled submit button at the beginning.
-     this.props.form.validateFields();
-   } */
-
-
-  // handleBlur() {
-  //   console.log('blur');
-  // }
-
-  // handleFocus() {
-  //   console.log('focus');
-  // }
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件,
-  //   // ['userName']参数只校验username的值
-  //   this.props.form.validateFields(['createDate'], (err, values) => {
-  //     if (!err) {
-  //       const createDateFormat = values.createDate.format('YYYY-MM-DD')
-  //       console.log('Received values of form: ', { ...values, createDate: createDateFormat });
-  //       // table01为model的namespace,tableData为effects下方法，相当与异步的action
-  //       this.props.dispatch({ type: 'table01/tableDataById', payload: { values } });
-  //     }
-  //   });
-  // }
   handleSubmit = (e) => {
     const dateFormat = 'YYYY-MM-DD';
     e.preventDefault();
@@ -59,7 +32,7 @@ class SearchForm extends React.Component {
         createDate: fieldsValue.createDate ? ([fieldsValue.createDate[0].format(dateFormat), fieldsValue.createDate[1].format(dateFormat)]) : [],
         departs: fieldsValue.departs ? fieldsValue.departs.join(',') : '',
         accounts: fieldsValue.accounts ? fieldsValue.accounts.join(',') : '',
-      };     
+      };
       // 提交
       this.props.dispatch({ type: 'table01/search', payload: values });
     });
@@ -123,10 +96,10 @@ class SearchForm extends React.Component {
           <Col md={9} sm={24}>
             {/* 账号选择 */}
             <Button type="primary" htmlType="submit">查询</Button>
-            <Button type="primary" style={{ marginLeft: '10px' }}>审核通过</Button>
-            <Button style={{ marginLeft: '10px' }}>审核驳回</Button>
-            <Button style={{ marginLeft: '10px' }}>批量下载</Button>
-            <Button style={{ marginLeft: '10px' }}>重置</Button>
+            <Button type="primary" >审核通过</Button>
+            <Button>审核驳回</Button>
+            <Button>批量下载</Button>
+            <Button>重置</Button>
             <a className={style.cursor} onClick={this.toggleSearchMoreInfo.bind(this)} style={{ marginLeft: '10px' }}>展开<Icon type={this.state.searchMore === 'none' ? 'up' : 'down'} /></a>
           </Col>
         </Row>

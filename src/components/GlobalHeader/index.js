@@ -12,10 +12,8 @@ function GlobalHeader(props) {
       <Menu.Item key="logout"><Icon type="logout" />退出登录</Menu.Item>
     </Menu>
   );
-
   return (
     <div style={{ float: 'right', marginRight: '50px' }}>
-      <Icon type="search" className={styles.rigitIcon} />
       <Icon type="bell" className={styles.rigitIcon} />
       <Dropdown overlay={menu}>
         <span>
@@ -26,5 +24,4 @@ function GlobalHeader(props) {
     </div>
   );
 }
-
 export default GlobalHeader;

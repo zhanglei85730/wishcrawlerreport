@@ -15,6 +15,7 @@
     "dva": "^2.1.0",
     "dva-loading": "^0.2.0",
     "mockjs": "^1.0.1-beta3",
+    "prop-types": "^15.6.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0"
   },

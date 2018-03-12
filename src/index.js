@@ -13,6 +13,8 @@ const app = dva({
 });
 
 app.model(require('./models/table01'));
+app.model(require("./models/globalSearchForm"));
+// app.model(require("./models/globalSearch"));
 app.model(require('./models/sideMenu'));
 app.model(require('./models/downloadDetail'));
 app.model(require('./models/mainLayout'));

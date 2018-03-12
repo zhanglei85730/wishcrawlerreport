@@ -2,14 +2,19 @@ import * as loginServices from '../services/login.js';
 
 export default {
   namespace: 'login',
-  state: { isAuthorized: false },
+  state: { isAuthorized: false, username: '' },
   reducers: {
     //  { payload }接受的参数为 yield put({})中的对象action
     Authorized(state, { payload }) {
-      // sessionStorage.setItem('authorized', JSON.stringify(payload.isAuthorized));      
+      if (payload.isAuthorized) {
+        sessionStorage.setItem('authorized', JSON.stringify(payload.isAuthorized));
+      }
       return { ...state, ...payload };
     },
     logout(state, { payload }) {
+      if (sessionStorage.getItem('authorized') != null) {
+        sessionStorage.removeItem('authorized');
+      }
       return { ...state, isAuthorized: payload };
     },
   },

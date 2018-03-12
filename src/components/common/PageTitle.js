@@ -14,5 +14,6 @@ function PageTitle() {
   ));
   return ss;
 };
+
 export default connect()(PageTitle);
 

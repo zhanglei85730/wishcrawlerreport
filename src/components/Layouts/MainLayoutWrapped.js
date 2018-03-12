@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, withRouter } from 'dva/router';
 import MainLayout from './MainLayout.js';
-import Login from '../Login';
+import Login from '../../routes/Login/Login';
 import menuNodes from '../../config/router.js';
 
 const LoginWrapped = () => {
@@ -11,12 +11,13 @@ const LoginWrapped = () => {
       <Switch>
         <Route path="/login" component={Login} />
       </Switch>
-      <Redirect to="/login" />
+      {window.location.pathname !== '/login' ? <Redirect to="/login" /> : ''}
     </div>
   );
 };
 
-function MainLayoutWrapped({ isAuthorized }) {
+function MainLayoutWrapped({ isAuthorized, location }) {
+  const sessionLogin = sessionStorage.getItem('authorized');
   const MainLayoutAgen = (
     <MainLayout>
       <Switch>
@@ -30,11 +31,13 @@ function MainLayoutWrapped({ isAuthorized }) {
         ))}
       </Switch>
       {/* 首页配置 登录后跳转到这里 */}
-      <Redirect to="/downloadDetail" />
+      {location.pathname === '/login' ? <Redirect to="/downloadDetail" /> : ''}
+
+
     </MainLayout>
   );
   return (
-    isAuthorized ? MainLayoutAgen : <LoginWrapped />
+    isAuthorized || sessionLogin ? MainLayoutAgen : <LoginWrapped />
   );
 }
 
