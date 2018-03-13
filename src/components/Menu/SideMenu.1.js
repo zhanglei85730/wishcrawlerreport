@@ -22,6 +22,54 @@ const ReportListChildMenus = [
   ['releaseDeduct', '/releaseDeduct', '释放暂扣款', ''],
 ];
 
+const menuData = [
+  {
+    name: '下载详情',
+    icon: 'download',
+    path: '/downloadDetail',
+    key: 'downloadDetail',
+  },
+  {
+    name: '详情报表',
+    icon: 'profile',
+    path: '/reportTetail',
+    key: 'reportTetail',
+  },
+  {
+    name: '报表明细',
+    icon: 'file-text',
+    path: '/reportList',
+    key: 'reportList',
+    children: [
+      {
+        name: '交易款项',
+        icon: '',
+        path: '/transactionMoney',
+        key: 'transactionMoney',
+      },
+      {
+        name: '扣除数额',
+        icon: '',
+        path: '/deduct',
+        key: 'deduct',
+      },
+      {
+        name: '释放暂扣款',
+        icon: '',
+        path: '/releaseDeduct',
+        key: 'releaseDeduct',
+      },
+    ],
+  },
+  {
+    name: '财务EAS凭证',
+    icon: 'pay-circle-o',
+    path: '/summary',
+    key: 'summary',
+  },
+];
+
+
 function SideMenu({ collapsed, activeKey }) {
   // dispatch不需要传入
   const collapsedData = collapsed.collapsed;

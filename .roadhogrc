@@ -1,38 +1,27 @@
 {
-  "entry": "src/index.js",
-  "disableCSSModules": false,
+  "entry": "src/*.js",
   "publicPath": "/",
-   "theme": {
-    "@primary-color": "#1890ff",
-    "@link-color": "#1890ff",
-    "@border-radius-base": "4px",
-    "@font-size-base": "15px",
+  "extraBabelPlugins": [
+    ["import", { "libraryName": "antd", "style": "css" }]
+  ],
+  "theme": {
+    "@primary-color": "#1DA57A",
+    "@link-color": "#1DA57A",
+    "@border-radius-base": "2px",
+    "@font-size-base": "16px",
     "@line-height-base": "1.2"
   },
   "env": {
     "development": {
       "extraBabelPlugins": [
         "dva-hmr",
-        "transform-runtime",
-          ["import", { "libraryName": "antd", "style": true }]
+        "transform-runtime"
       ]
-    }, 
-   "autoprefixer": null,   
-   "extraBabelPlugins": [
-    "transform-runtime",
-    ["import", { "libraryName": "antd", "style": true }]
-  ],
+    },
     "production": {
       "extraBabelPlugins": [
         "transform-runtime"
       ]
-    }
-  },
-  "proxy": {
-      "/api": {
-        "target": "",
-        "changeOrigin": true,
-        "pathRewrite": { "^/api" : "" }
     }
   }
 }

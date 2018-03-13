@@ -1,3 +1,6 @@
+import menuData from '../config/menu.js';
+
+
 export default {
   namespace: 'common',
   state: {
@@ -12,31 +15,33 @@ export default {
     changeBreadcrumb(state, { payload: breadcrumb }) {
       return { ...state, ...breadcrumb };
     },
-    updateActiveIndex(state, action) {      
+    updateActiveIndex(state, action) {
       const pathname = action.payload;
-      let activeKeyValue = 'downloadDetail';
-      let breadcrumbItem = '';
-      if (/downloadDetail/.test(pathname)) {
-        activeKeyValue = 'downloadDetail';
-        breadcrumbItem = '下载详情';
-      } else if (/reportTetail/.test(pathname)) {
-        activeKeyValue = 'reportTetail';
-        breadcrumbItem = '详情报表';
-      } else if (/transactionMoney/.test(pathname)) {
-        activeKeyValue = 'transactionMoney';
-        breadcrumbItem = '交易款项';
-      } else if (/deduct/.test(pathname)) {
-        activeKeyValue = 'deduct';
-        breadcrumbItem = '扣除数额';
-      } else if (/releaseDeduct/.test(pathname)) {
-        activeKeyValue = 'releaseDeduct';
-        breadcrumbItem = '释放暂扣款';
+      const activeKeyValue = 'downloadDetail';
+      // let breadcrumbItem = '';
+      const breadcrumbArr = [];
+      // 生成层级面包削方法
+      function breadcrumb(node) {
+        node.map((item) => {
+          if (item.hasOwnProperty('children')) {
+            breadcrumb(item.children);
+          } else {
+            // breadcrumbItem = node.name;
+            if (pathname === item.path) {
+              if (item.hasOwnProperty('parentName')) {
+                breadcrumbArr.push({ name: item.parentName }, { name: item.name });
+              } else {
+                breadcrumbArr.push({ name: item.name });
+              }
+            }
+          }
+        });
       }
+      breadcrumb(menuData);
       return {
         ...state,
         activeKey: activeKeyValue,
-        breadcrumb: [state.breadcrumb[0],
-        { name: breadcrumbItem }],
+        breadcrumb: [state.breadcrumb[0], ...breadcrumbArr],
       };
     },
   },
@@ -52,3 +57,4 @@ export default {
     },
   },
 };
+
